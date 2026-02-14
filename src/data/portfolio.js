@@ -5,42 +5,23 @@ const portfolioData = {
 			"I specialize in full-stack development, with expertise in modern web technologies. I'm always eager to learn new skills and stay up-to-date with the latest industry trends.",
 			"When I'm not coding, you can find me solving problems on LeetCode, contributing to open-source projects, or exploring new technologies and frameworks.",
 		],
-		highlights: [
-			{
-				icon: "🎯",
-				title: "Problem Solver",
-				description:
-					"Love tackling complex challenges with elegant solutions",
-			},
-			{
-				icon: "🚀",
-				title: "Fast Learner",
-				description:
-					"Always adapting to new technologies and best practices",
-			},
-			{
-				icon: "🤝",
-				title: "Team Player",
-				description: "Believe in collaboration and knowledge sharing",
-			},
-		],
 	},
 
 	skills: [
-		{ name: "JavaScript", level: 90 },
-		{ name: "TypeScript", level: 85 },
-		{ name: "React", level: 90 },
-		{ name: "Node.js", level: 85 },
-		{ name: "Python", level: 80 },
-		{ name: "Express", level: 85 },
-		{ name: "MongoDB", level: 80 },
-		{ name: "PostgreSQL", level: 75 },
-		{ name: "HTML5", level: 95 },
-		{ name: "CSS3", level: 90 },
-		{ name: "Tailwind", level: 88 },
-		{ name: "Git", level: 85 },
-		{ name: "Docker", level: 70 },
-		{ name: "SQL", level: 80 },
+		{ name: "JavaScript" },
+		{ name: "TypeScript" },
+		{ name: "React" },
+		{ name: "Node.js" },
+		{ name: "Python" },
+		{ name: "Express" },
+		{ name: "MongoDB" },
+		{ name: "PostgreSQL" },
+		{ name: "HTML5" },
+		{ name: "CSS3" },
+		{ name: "Tailwind" },
+		{ name: "Git" },
+		{ name: "Docker" },
+		{ name: "SQL" },
 	],
 
 	projects: [

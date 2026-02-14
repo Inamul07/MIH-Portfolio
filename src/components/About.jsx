@@ -2,11 +2,46 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import portfolioData from "../data/portfolio";
+import {
+	FaReact,
+	FaNodeJs,
+	FaPython,
+	FaGitAlt,
+	FaDocker,
+	FaDatabase,
+} from "react-icons/fa";
+import {
+	SiJavascript,
+	SiTypescript,
+	SiMongodb,
+	SiPostgresql,
+	SiExpress,
+	SiTailwindcss,
+	SiHtml5,
+	SiCss3,
+} from "react-icons/si";
 import "./About.css";
 
 const About = () => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+	const iconMap = {
+		JavaScript: <SiJavascript />,
+		TypeScript: <SiTypescript />,
+		React: <FaReact />,
+		"Node.js": <FaNodeJs />,
+		Python: <FaPython />,
+		Express: <SiExpress />,
+		MongoDB: <SiMongodb />,
+		PostgreSQL: <SiPostgresql />,
+		HTML5: <SiHtml5 />,
+		CSS3: <SiCss3 />,
+		Tailwind: <SiTailwindcss />,
+		Git: <FaGitAlt />,
+		Docker: <FaDocker />,
+		SQL: <FaDatabase />,
+	};
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -50,18 +85,18 @@ const About = () => {
 						)}
 					</div>
 
-					<div className="highlights">
-						{portfolioData.about.highlights.map(
-							(highlight, index) => (
-								<div key={index} className="highlight-card">
-									<div className="highlight-icon">
-										{highlight.icon}
-									</div>
-									<h3>{highlight.title}</h3>
-									<p>{highlight.description}</p>
-								</div>
-							),
-						)}
+					<div className="skills-section">
+						<h3>Skills & Technologies</h3>
+						<div className="skills-tags">
+							{portfolioData.skills.map((skill, index) => (
+								<span key={index} className="skill-tag">
+									<span className="skill-icon">
+										{iconMap[skill.name] || "💻"}
+									</span>
+									{skill.name}
+								</span>
+							))}
+						</div>
 					</div>
 				</motion.div>
 			</motion.div>
