@@ -1,0 +1,154 @@
+.experience {
+	padding: 5rem 2rem;
+	background: var(--bg-primary);
+}
+
+.timeline {
+	position: relative;
+	max-width: 900px;
+	margin: 0 auto;
+	padding-left: 50px;
+}
+
+.timeline::before {
+	content: "";
+	position: absolute;
+	left: 20px;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: var(--border-color);
+}
+
+.timeline-item {
+	position: relative;
+	margin-bottom: 3rem;
+}
+
+.timeline-icon {
+	position: absolute;
+	left: -30px;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: var(--bg-tertiary);
+	border: 2px solid var(--accent-primary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--accent-primary);
+	font-size: 1.2rem;
+	z-index: 2;
+}
+
+.timeline-content {
+	background: var(--bg-tertiary);
+	padding: 2rem;
+	border-radius: 12px;
+	border: 1px solid var(--border-color);
+	transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+	border-color: var(--accent-primary);
+	box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+	transform: translateX(5px);
+}
+
+.timeline-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.timeline-header h3 {
+	font-size: 1.4rem;
+	color: var(--text-primary);
+	margin: 0;
+}
+
+.timeline-period {
+	color: var(--accent-primary);
+	font-weight: 600;
+	font-size: 0.9rem;
+	padding: 0.3rem 0.8rem;
+	background: var(--bg-secondary);
+	border-radius: 6px;
+	white-space: nowrap;
+}
+
+.timeline-company {
+	color: var(--text-secondary);
+	font-size: 1.1rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+
+.timeline-description {
+	color: var(--text-secondary);
+	line-height: 1.6;
+	margin-bottom: 1rem;
+}
+
+.timeline-achievements {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.timeline-achievements li {
+	color: var(--text-secondary);
+	padding-left: 1.5rem;
+	position: relative;
+	margin-bottom: 0.5rem;
+}
+
+.timeline-achievements li::before {
+	content: "→";
+	position: absolute;
+	left: 0;
+	color: var(--accent-primary);
+	font-weight: bold;
+}
+
+@media (max-width: 768px) {
+	.experience {
+		padding: 3rem 1.5rem;
+	}
+
+	.timeline {
+		padding-left: 40px;
+	}
+
+	.timeline::before {
+		left: 15px;
+	}
+
+	.timeline-icon {
+		left: -25px;
+		width: 35px;
+		height: 35px;
+		font-size: 1rem;
+	}
+
+	.timeline-content {
+		padding: 1.5rem;
+	}
+
+	.timeline-header {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.timeline-header h3 {
+		font-size: 1.2rem;
+	}
+
+	.timeline-period {
+		align-self: flex-start;
+	}
+}
