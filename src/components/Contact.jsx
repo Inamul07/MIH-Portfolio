@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import portfolioData from "../data/portfolio";
 import "./Contact.css";
 
 const Contact = () => {
@@ -64,8 +65,10 @@ const Contact = () => {
 								<FaEnvelope className="contact-icon" />
 								<div>
 									<h4>Email</h4>
-									<a href="mailto:contact@example.com">
-										contact@example.com
+									<a
+										href={`mailto:${portfolioData.personal.email}`}
+									>
+										{portfolioData.personal.email}
 									</a>
 								</div>
 							</div>
@@ -73,7 +76,7 @@ const Contact = () => {
 								<FaMapMarkerAlt className="contact-icon" />
 								<div>
 									<h4>Location</h4>
-									<p>Your City, Country</p>
+									<p>{portfolioData.personal.location}</p>
 								</div>
 							</div>
 						</div>

@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import portfolioData from "../data/portfolio";
 import "./Footer.css";
 
 const Footer = () => {
@@ -9,11 +10,8 @@ const Footer = () => {
 		<footer className="footer">
 			<div className="footer-content">
 				<div className="footer-section">
-					<h3>John Doe</h3>
-					<p>
-						Software Developer passionate about building amazing web
-						experiences.
-					</p>
+					<h3>{portfolioData.personal.name}</h3>
+					<p>{portfolioData.personal.tagline}</p>
 				</div>
 
 				<div className="footer-section">
@@ -38,7 +36,7 @@ const Footer = () => {
 					<h4>Connect</h4>
 					<div className="footer-social">
 						<a
-							href="https://github.com/Inamul07"
+							href={`https://github.com/${portfolioData.personal.github}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="GitHub"
@@ -46,7 +44,7 @@ const Footer = () => {
 							<FaGithub />
 						</a>
 						<a
-							href="https://linkedin.com"
+							href={portfolioData.personal.linkedin}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="LinkedIn"
@@ -54,14 +52,17 @@ const Footer = () => {
 							<FaLinkedin />
 						</a>
 						<a
-							href="https://leetcode.com/07_ajax"
+							href={`https://leetcode.com/${portfolioData.personal.leetcode}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="LeetCode"
 						>
 							<SiLeetcode />
 						</a>
-						<a href="mailto:contact@example.com" aria-label="Email">
+						<a
+							href={`mailto:${portfolioData.personal.email}`}
+							aria-label="Email"
+						>
 							<FaEnvelope />
 						</a>
 					</div>
@@ -70,8 +71,8 @@ const Footer = () => {
 
 			<div className="footer-bottom">
 				<p>
-					&copy; {currentYear} John Doe. Made with{" "}
-					<FaHeart className="heart-icon" /> using React & Vite
+					&copy; {currentYear} {portfolioData.personal.name}. Made
+					with <FaHeart className="heart-icon" /> using React & Vite
 				</p>
 			</div>
 		</footer>

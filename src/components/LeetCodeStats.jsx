@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { SiLeetcode } from "react-icons/si";
 import axios from "axios";
+import portfolioData from "../data/portfolio";
 import "./LeetCodeStats.css";
 
 const LeetCodeStats = () => {
@@ -10,7 +11,7 @@ const LeetCodeStats = () => {
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
 	const [stats, setStats] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const username = "07_ajax";
+	const username = portfolioData.personal.leetcode;
 
 	useEffect(() => {
 		const fetchLeetCodeStats = async () => {

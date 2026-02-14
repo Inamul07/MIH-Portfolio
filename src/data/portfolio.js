@@ -1,4 +1,16 @@
 const portfolioData = {
+	personal: {
+		name: "Mohammed Inamul Hassan",
+		role: "Software Developer",
+		tagline:
+			"Software Developer passionate about building amazing web experiences",
+		email: "contact@example.com",
+		location: "Your City, Country",
+		github: "Inamul07",
+		linkedin: "https://linkedin.com",
+		leetcode: "07_ajax",
+	},
+
 	about: {
 		description: [
 			"I'm a passionate Software Developer with a love for creating elegant solutions to complex problems. My journey in tech began with curiosity and has evolved into a commitment to building impactful applications.",

@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
 import axios from "axios";
+import portfolioData from "../data/portfolio";
 import "./GitHubStats.css";
 
 const GitHubStats = () => {
@@ -10,7 +11,7 @@ const GitHubStats = () => {
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
 	const [stats, setStats] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const username = "Inamul07";
+	const username = portfolioData.personal.github;
 
 	useEffect(() => {
 		const fetchGitHubStats = async () => {
