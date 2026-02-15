@@ -15,34 +15,108 @@ const LeetCodeStats = () => {
 
 	useEffect(() => {
 		const fetchLeetCodeStats = async () => {
-			try {
-				// Using alfa-leetcode-api (more reliable)
-				const response = await axios.get(
-					`https://alfa-leetcode-api.onrender.com/${username}/solved`,
-				);
-
-				const data = response.data;
-
-				const problemsSolved = {
-					total: data.solvedProblem || 0,
-					easy: data.easySolved || 0,
-					medium: data.mediumSolved || 0,
-					hard: data.hardSolved || 0,
-				};
-
-				setStats(problemsSolved);
-				setLoading(false);
-			} catch (error) {
-				console.error("Error fetching LeetCode stats:", error);
-				// Fallback to placeholder data if API fails
-				setStats({
-					total: 0,
-					easy: 0,
-					medium: 0,
-					hard: 0,
-				});
-				setLoading(false);
+			// Check cache first (valid for 1 hour)
+			const cacheKey = `leetcode_stats_${username}`;
+			const cachedData = localStorage.getItem(cacheKey);
+			const cacheTime = localStorage.getItem(`${cacheKey}_time`);
+			
+			if (cachedData && cacheTime) {
+				const age = Date.now() - parseInt(cacheTime);
+				// Use cache if less than 1 hour old
+				if (age < 3600000) {
+					setStats(JSON.parse(cachedData));
+					setLoading(false);
+					return;
+				}
 			}
+
+			// Try multiple API endpoints
+			const apiEndpoints = [
+				`https://leetcode-stats-api.herokuapp.com/${username}`,
+				`https://leetcode-api-faisalshohag.vercel.app/${username}`,
+			];
+
+			for (const endpoint of apiEndpoints) {
+				try {
+					const response = await axios.get(endpoint, { 
+						timeout: 8000,
+						headers: {
+							'Accept': 'application/json',
+						}
+					});
+
+					const data = response.data;
+					console.log('LeetCode API Response:', data); // Debug log
+					
+					// Parse the response based on API structure
+					let easySolved = 0;
+					let mediumSolved = 0;
+					let hardSolved = 0;
+					let acceptanceRate = 0;
+					
+					// Get easy/medium/hard breakdown
+					if (data.easySolved !== undefined) {
+						easySolved = data.easySolved || 0;
+						mediumSolved = data.mediumSolved || 0;
+						hardSolved = data.hardSolved || 0;
+					} else if (data.submitStats?.acSubmissionNum) {
+						// Parse from acSubmissionNum array
+						const acStats = data.submitStats.acSubmissionNum;
+						easySolved = acStats.find(s => s.difficulty === 'Easy')?.count || 0;
+						mediumSolved = acStats.find(s => s.difficulty === 'Medium')?.count || 0;
+						hardSolved = acStats.find(s => s.difficulty === 'Hard')?.count || 0;
+					}
+					
+					// Get acceptance rate
+					if (data.acceptanceRate) {
+						acceptanceRate = parseFloat(data.acceptanceRate).toFixed(1);
+					} else if (data.submitStats?.acSubmissionNum) {
+						const totalAc = data.submitStats.acSubmissionNum.find(s => s.difficulty === 'All')?.count || 0;
+						const totalSub = data.submitStats.totalSubmissionNum.find(s => s.difficulty === 'All')?.submissions || 1;
+						acceptanceRate = ((totalAc / totalSub) * 100).toFixed(1);
+					}
+					
+					const leetcodeStats = {
+						totalSolved: data.totalSolved || data.solvedProblem || 0,
+						easySolved: easySolved,
+						mediumSolved: mediumSolved,
+						hardSolved: hardSolved,
+						ranking: data.ranking || 0,
+						acceptanceRate: acceptanceRate,
+					};
+
+					console.log('Parsed LeetCode Stats:', leetcodeStats); // Debug log
+					
+					setStats(leetcodeStats);
+					// Cache the successful response
+					localStorage.setItem(cacheKey, JSON.stringify(leetcodeStats));
+					localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
+					setLoading(false);
+					return; // Success, exit the loop
+				} catch (error) {
+					console.warn(`Failed to fetch from ${endpoint}:`, error.message);
+					continue; // Try next endpoint
+				}
+			}
+
+			// All APIs failed
+			console.error("All LeetCode API endpoints failed");
+			
+			// If we have old cached data, use it even if expired
+			if (cachedData) {
+				setStats(JSON.parse(cachedData));
+			} else {
+				// Fallback to placeholder data
+				setStats({
+					totalSolved: 0,
+					easySolved: 0,
+					mediumSolved: 0,
+					hardSolved: 0,
+					ranking: 0,
+					acceptanceRate: 0,
+				});
+			}
+			setLoading(false);
 		};
 
 		if (isInView) {
@@ -102,17 +176,17 @@ const LeetCodeStats = () => {
 							className="stat-card total"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.total}</div>
+							<div className="stat-value">{stats.totalSolved}</div>
 							<div className="stat-label">
-								Total Problems Solved
+								Total Solved
 							</div>
 						</motion.div>
 						<motion.div
 							className="stat-card easy"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.easy}</div>
-							<div className="stat-label">Easy</div>
+							<div className="stat-value">{stats.easySolved}</div>
+							<div className="stat-label">Easy Problems</div>
 							<div className="difficulty-badge easy-badge">
 								Easy
 							</div>
@@ -121,8 +195,8 @@ const LeetCodeStats = () => {
 							className="stat-card medium"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.medium}</div>
-							<div className="stat-label">Medium</div>
+							<div className="stat-value">{stats.mediumSolved}</div>
+							<div className="stat-label">Medium Problems</div>
 							<div className="difficulty-badge medium-badge">
 								Medium
 							</div>
@@ -131,11 +205,27 @@ const LeetCodeStats = () => {
 							className="stat-card hard"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.hard}</div>
-							<div className="stat-label">Hard</div>
+							<div className="stat-value">{stats.hardSolved}</div>
+							<div className="stat-label">Hard Problems</div>
 							<div className="difficulty-badge hard-badge">
 								Hard
 							</div>
+						</motion.div>
+						<motion.div
+							className="stat-card ranking"
+							variants={itemVariants}
+						>
+							<div className="stat-value">
+								{stats.ranking > 0 ? stats.ranking.toLocaleString() : 'N/A'}
+							</div>
+							<div className="stat-label">Global Ranking</div>
+						</motion.div>
+						<motion.div
+							className="stat-card acceptance"
+							variants={itemVariants}
+						>
+							<div className="stat-value">{stats.acceptanceRate}%</div>
+							<div className="stat-label">Acceptance Rate</div>
 						</motion.div>
 					</motion.div>
 				) : (

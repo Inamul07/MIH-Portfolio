@@ -14,8 +14,10 @@
 	margin-bottom: 3rem;
 }
 
-.stat-card.total {
-	grid-column: span 1;
+@media (min-width: 1024px) {
+	.stats-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 .stat-card {
@@ -67,6 +69,16 @@
 	box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
 }
 
+.stat-card.ranking:hover {
+	border-color: var(--accent-secondary);
+	box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+}
+
+.stat-card.acceptance:hover {
+	border-color: var(--accent-primary);
+	box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+}
+
 .leetcode-link {
 	text-align: center;
 }
@@ -108,18 +120,10 @@
 		grid-template-columns: 1fr;
 		gap: 1rem;
 	}
-
-	.stat-card.total {
-		grid-column: span 1;
-	}
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
 	.stats-grid {
 		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.stat-card.total {
-		grid-column: span 2;
 	}
 }
