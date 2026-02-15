@@ -1,6 +1,7 @@
 const portfolioData = {
 	personal: {
-		name: "Mohammed Inamul Hassan",
+		name: "Mohammed Inamul Hassan M",
+		shorthand: "MIH",
 		role: "Software Developer",
 		tagline:
 			"Software Developer passionate about building amazing web experiences",

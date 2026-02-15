@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
+import portfolioData from "../data/portfolio";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -41,7 +42,9 @@ const Navbar = () => {
 		>
 			<div className="nav-container">
 				<a href="#home" className="nav-logo" onClick={closeMenu}>
-					<span className="logo-text">JD</span>
+					<span className="logo-text">
+						{portfolioData.personal.shorthand}
+					</span>
 				</a>
 
 				<div className="nav-menu-icon" onClick={toggleMenu}>
