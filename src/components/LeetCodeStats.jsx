@@ -19,7 +19,7 @@ const LeetCodeStats = () => {
 			const cacheKey = `leetcode_stats_${username}`;
 			const cachedData = localStorage.getItem(cacheKey);
 			const cacheTime = localStorage.getItem(`${cacheKey}_time`);
-			
+
 			if (cachedData && cacheTime) {
 				const age = Date.now() - parseInt(cacheTime);
 				// Use cache if less than 1 hour old
@@ -38,22 +38,22 @@ const LeetCodeStats = () => {
 
 			for (const endpoint of apiEndpoints) {
 				try {
-					const response = await axios.get(endpoint, { 
+					const response = await axios.get(endpoint, {
 						timeout: 8000,
 						headers: {
-							'Accept': 'application/json',
-						}
+							Accept: "application/json",
+						},
 					});
 
 					const data = response.data;
-					console.log('LeetCode API Response:', data); // Debug log
-					
+					console.log("LeetCode API Response:", data); // Debug log
+
 					// Parse the response based on API structure
 					let easySolved = 0;
 					let mediumSolved = 0;
 					let hardSolved = 0;
 					let acceptanceRate = 0;
-					
+
 					// Get easy/medium/hard breakdown
 					if (data.easySolved !== undefined) {
 						easySolved = data.easySolved || 0;
@@ -62,22 +62,39 @@ const LeetCodeStats = () => {
 					} else if (data.submitStats?.acSubmissionNum) {
 						// Parse from acSubmissionNum array
 						const acStats = data.submitStats.acSubmissionNum;
-						easySolved = acStats.find(s => s.difficulty === 'Easy')?.count || 0;
-						mediumSolved = acStats.find(s => s.difficulty === 'Medium')?.count || 0;
-						hardSolved = acStats.find(s => s.difficulty === 'Hard')?.count || 0;
+						easySolved =
+							acStats.find((s) => s.difficulty === "Easy")
+								?.count || 0;
+						mediumSolved =
+							acStats.find((s) => s.difficulty === "Medium")
+								?.count || 0;
+						hardSolved =
+							acStats.find((s) => s.difficulty === "Hard")
+								?.count || 0;
 					}
-					
+
 					// Get acceptance rate
 					if (data.acceptanceRate) {
-						acceptanceRate = parseFloat(data.acceptanceRate).toFixed(1);
+						acceptanceRate = parseFloat(
+							data.acceptanceRate,
+						).toFixed(1);
 					} else if (data.submitStats?.acSubmissionNum) {
-						const totalAc = data.submitStats.acSubmissionNum.find(s => s.difficulty === 'All')?.count || 0;
-						const totalSub = data.submitStats.totalSubmissionNum.find(s => s.difficulty === 'All')?.submissions || 1;
-						acceptanceRate = ((totalAc / totalSub) * 100).toFixed(1);
+						const totalAc =
+							data.submitStats.acSubmissionNum.find(
+								(s) => s.difficulty === "All",
+							)?.count || 0;
+						const totalSub =
+							data.submitStats.totalSubmissionNum.find(
+								(s) => s.difficulty === "All",
+							)?.submissions || 1;
+						acceptanceRate = ((totalAc / totalSub) * 100).toFixed(
+							1,
+						);
 					}
-					
+
 					const leetcodeStats = {
-						totalSolved: data.totalSolved || data.solvedProblem || 0,
+						totalSolved:
+							data.totalSolved || data.solvedProblem || 0,
 						easySolved: easySolved,
 						mediumSolved: mediumSolved,
 						hardSolved: hardSolved,
@@ -85,23 +102,32 @@ const LeetCodeStats = () => {
 						acceptanceRate: acceptanceRate,
 					};
 
-					console.log('Parsed LeetCode Stats:', leetcodeStats); // Debug log
-					
+					console.log("Parsed LeetCode Stats:", leetcodeStats); // Debug log
+
 					setStats(leetcodeStats);
 					// Cache the successful response
-					localStorage.setItem(cacheKey, JSON.stringify(leetcodeStats));
-					localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
+					localStorage.setItem(
+						cacheKey,
+						JSON.stringify(leetcodeStats),
+					);
+					localStorage.setItem(
+						`${cacheKey}_time`,
+						Date.now().toString(),
+					);
 					setLoading(false);
 					return; // Success, exit the loop
 				} catch (error) {
-					console.warn(`Failed to fetch from ${endpoint}:`, error.message);
+					console.warn(
+						`Failed to fetch from ${endpoint}:`,
+						error.message,
+					);
 					continue; // Try next endpoint
 				}
 			}
 
 			// All APIs failed
 			console.error("All LeetCode API endpoints failed");
-			
+
 			// If we have old cached data, use it even if expired
 			if (cachedData) {
 				setStats(JSON.parse(cachedData));
@@ -176,10 +202,10 @@ const LeetCodeStats = () => {
 							className="stat-card total"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.totalSolved}</div>
-							<div className="stat-label">
-								Total Solved
+							<div className="stat-value">
+								{stats.totalSolved}
 							</div>
+							<div className="stat-label">Total Solved</div>
 						</motion.div>
 						<motion.div
 							className="stat-card easy"
@@ -195,7 +221,9 @@ const LeetCodeStats = () => {
 							className="stat-card medium"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.mediumSolved}</div>
+							<div className="stat-value">
+								{stats.mediumSolved}
+							</div>
 							<div className="stat-label">Medium Problems</div>
 							<div className="difficulty-badge medium-badge">
 								Medium
@@ -216,7 +244,9 @@ const LeetCodeStats = () => {
 							variants={itemVariants}
 						>
 							<div className="stat-value">
-								{stats.ranking > 0 ? stats.ranking.toLocaleString() : 'N/A'}
+								{stats.ranking > 0
+									? stats.ranking.toLocaleString()
+									: "N/A"}
 							</div>
 							<div className="stat-label">Global Ranking</div>
 						</motion.div>
@@ -224,7 +254,9 @@ const LeetCodeStats = () => {
 							className="stat-card acceptance"
 							variants={itemVariants}
 						>
-							<div className="stat-value">{stats.acceptanceRate}%</div>
+							<div className="stat-value">
+								{stats.acceptanceRate}%
+							</div>
 							<div className="stat-label">Acceptance Rate</div>
 						</motion.div>
 					</motion.div>

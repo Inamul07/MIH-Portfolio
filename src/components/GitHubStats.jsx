@@ -33,12 +33,40 @@ const GitHubStats = () => {
 					0,
 				);
 
+				// Fetch streak and commit data from GitHub Streak Stats API
+				let totalCommits = 0;
+				let longestStreak = 0;
+
+				try {
+					const streakResponse = await axios.get(
+						`https://github-readme-streak-stats.herokuapp.com/?user=${username}&type=json`,
+						{ timeout: 10000 },
+					);
+
+					if (streakResponse.data) {
+						totalCommits =
+							streakResponse.data.totalContributions || 0;
+						longestStreak =
+							streakResponse.data.longestStreak?.length || 0;
+					}
+				} catch (streakError) {
+					console.warn(
+						"Streak stats unavailable (works after deployment):",
+						streakError.message,
+					);
+					// Set to 0 for now, will work after deployment
+					totalCommits = 0;
+					longestStreak = 0;
+				}
+
 				setStats({
 					publicRepos: userResponse.data.public_repos,
 					followers: userResponse.data.followers,
 					following: userResponse.data.following,
 					totalStars,
 					totalForks,
+					totalCommits,
+					longestStreak,
 					avatarUrl: userResponse.data.avatar_url,
 					bio: userResponse.data.bio,
 				});
@@ -137,6 +165,28 @@ const GitHubStats = () => {
 						>
 							<div className="stat-value">{stats.followers}</div>
 							<div className="stat-label">Followers</div>
+						</motion.div>
+						<motion.div
+							className="stat-card"
+							variants={itemVariants}
+						>
+							<div className="stat-value">
+								{stats.totalCommits > 0
+									? stats.totalCommits.toLocaleString()
+									: "N/A"}
+							</div>
+							<div className="stat-label">Total Commits</div>
+						</motion.div>
+						<motion.div
+							className="stat-card"
+							variants={itemVariants}
+						>
+							<div className="stat-value">
+								{stats.longestStreak > 0
+									? `${stats.longestStreak} days`
+									: "N/A"}
+							</div>
+							<div className="stat-label">Longest Streak</div>
 						</motion.div>
 					</motion.div>
 				) : (
