@@ -61,9 +61,8 @@ const Hero = () => {
 							{portfolioData.personal.role}
 						</h2>
 						<p className="hero-description">
-							Crafting elegant solutions to complex problems.
-							Passionate about building scalable web applications
-							and exploring new technologies.
+							Building digital universes and exploring the
+							horizons of code, one line at a time.
 						</p>
 					</motion.div>
 

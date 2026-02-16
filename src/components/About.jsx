@@ -3,22 +3,22 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import portfolioData from "../data/portfolio";
 import {
-	FaReact,
-	FaNodeJs,
+	FaJava,
 	FaPython,
+	FaReact,
 	FaGitAlt,
 	FaDocker,
 	FaDatabase,
 } from "react-icons/fa";
 import {
-	SiJavascript,
-	SiTypescript,
-	SiMongodb,
+	SiC,
 	SiPostgresql,
-	SiExpress,
-	SiTailwindcss,
-	SiHtml5,
-	SiCss3,
+	SiSpringboot,
+	SiJavascript,
+	SiFirebase,
+	SiFlask,
+	SiFastapi,
+	SiMongodb,
 } from "react-icons/si";
 import "./About.css";
 
@@ -27,17 +27,17 @@ const About = () => {
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
 
 	const iconMap = {
-		JavaScript: <SiJavascript />,
-		TypeScript: <SiTypescript />,
-		React: <FaReact />,
-		"Node.js": <FaNodeJs />,
+		C: <SiC />,
+		Java: <FaJava />,
 		Python: <FaPython />,
-		Express: <SiExpress />,
-		MongoDB: <SiMongodb />,
 		PostgreSQL: <SiPostgresql />,
-		HTML5: <SiHtml5 />,
-		CSS3: <SiCss3 />,
-		Tailwind: <SiTailwindcss />,
+		React: <FaReact />,
+		"Spring Boot": <SiSpringboot />,
+		JavaScript: <SiJavascript />,
+		Firebase: <SiFirebase />,
+		Flask: <SiFlask />,
+		FastAPI: <SiFastapi />,
+		MongoDB: <SiMongodb />,
 		Git: <FaGitAlt />,
 		Docker: <FaDocker />,
 		SQL: <FaDatabase />,

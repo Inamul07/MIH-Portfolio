@@ -41,7 +41,7 @@ const Experience = () => {
 					}
 					transition={{ duration: 0.6 }}
 				>
-					Experience & Education
+					Experience
 				</motion.h2>
 
 				<motion.div
@@ -67,22 +67,29 @@ const Experience = () => {
 								<div className="timeline-header">
 									<div className="timeline-title-group">
 										<h3>{item.title}</h3>
-										<h4 className="timeline-company">{item.company}</h4>
+										<h4 className="timeline-company">
+											{item.company}
+										</h4>
 									</div>
 									<span className="timeline-period">
 										{item.period}
 									</span>
 								</div>
-								<p className="timeline-description">{item.description}</p>
-								{item.achievements && item.achievements.length > 0 && (
-									<ul className="timeline-achievements">
-										{item.achievements.map(
-											(achievement, idx) => (
-												<li key={idx}>{achievement}</li>
-											),
-										)}
-									</ul>
-								)}
+								<p className="timeline-description">
+									{item.description}
+								</p>
+								{item.achievements &&
+									item.achievements.length > 0 && (
+										<ul className="timeline-achievements">
+											{item.achievements.map(
+												(achievement, idx) => (
+													<li key={idx}>
+														{achievement}
+													</li>
+												),
+											)}
+										</ul>
+									)}
 							</div>
 						</motion.div>
 					))}
