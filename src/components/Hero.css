@@ -45,6 +45,27 @@
 	font-size: clamp(1.5rem, 3vw, 2rem);
 	font-weight: 500;
 	margin-bottom: 1.5rem;
+	min-height: 3rem;
+	display: flex;
+	align-items: center;
+}
+
+.typing-cursor {
+	color: var(--accent-primary);
+	font-weight: 300;
+	margin-left: 2px;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0%,
+	50% {
+		opacity: 1;
+	}
+	51%,
+	100% {
+		opacity: 0;
+	}
 }
 
 .hero-description {

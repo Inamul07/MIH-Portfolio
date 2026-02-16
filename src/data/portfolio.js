@@ -2,7 +2,13 @@ const portfolioData = {
 	personal: {
 		name: "Mohammed Inamul Hassan M",
 		shorthand: "MIH",
-		role: "Software Developer",
+		roles: [
+			"Software Developer",
+			"Database Developer",
+			"Problem Solver",
+			"Tech Enthusiast",
+			"Philomath",
+		],
 		tagline: "",
 		email: "mohammedinamul87@gmail.com",
 		location: "Chennai, India",

@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import portfolioData from "../data/portfolio";
 import personImage from "../assets/Portfolio.png";
 import "./Hero.css";
 
 const Hero = () => {
+	const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+	const [displayedText, setDisplayedText] = useState("");
+	const [isDeleting, setIsDeleting] = useState(false);
+	const roles = portfolioData.personal.roles;
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -41,6 +47,42 @@ const Hero = () => {
 		},
 	};
 
+	// Typing animation effect
+	useEffect(() => {
+		const currentRole = roles[currentRoleIndex];
+		const typingSpeed = isDeleting ? 50 : 100;
+		const pauseDuration = isDeleting ? 500 : 2000;
+
+		const timer = setTimeout(() => {
+			if (!isDeleting) {
+				// Typing
+				if (displayedText.length < currentRole.length) {
+					setDisplayedText(
+						currentRole.slice(0, displayedText.length + 1),
+					);
+				} else {
+					// Finished typing, wait then start deleting
+					setTimeout(() => setIsDeleting(true), pauseDuration);
+				}
+			} else {
+				// Deleting
+				if (displayedText.length > 0) {
+					setDisplayedText(
+						currentRole.slice(0, displayedText.length - 1),
+					);
+				} else {
+					// Finished deleting, move to next role
+					setIsDeleting(false);
+					setCurrentRoleIndex(
+						(prevIndex) => (prevIndex + 1) % roles.length,
+					);
+				}
+			}
+		}, typingSpeed);
+
+		return () => clearTimeout(timer);
+	}, [displayedText, isDeleting, currentRoleIndex, roles]);
+
 	return (
 		<section className="hero" id="home">
 			<div className="hero-container">
@@ -58,7 +100,8 @@ const Hero = () => {
 							</span>
 						</h1>
 						<h2 className="hero-subtitle">
-							{portfolioData.personal.role}
+							{displayedText}
+							<span className="typing-cursor">|</span>
 						</h2>
 						<p className="hero-description">
 							Building digital universes and exploring the
