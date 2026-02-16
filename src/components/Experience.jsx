@@ -64,14 +64,18 @@ const Experience = () => {
 								)}
 							</div>
 							<div className="timeline-content">
-								<span className="timeline-date">
-									{item.period}
-								</span>
-								<h3>{item.title}</h3>
-								<h4>{item.company}</h4>
-								<p>{item.description}</p>
-								{item.achievements && (
-									<ul className="achievements">
+								<div className="timeline-header">
+									<div className="timeline-title-group">
+										<h3>{item.title}</h3>
+										<h4 className="timeline-company">{item.company}</h4>
+									</div>
+									<span className="timeline-period">
+										{item.period}
+									</span>
+								</div>
+								<p className="timeline-description">{item.description}</p>
+								{item.achievements && item.achievements.length > 0 && (
+									<ul className="timeline-achievements">
 										{item.achievements.map(
 											(achievement, idx) => (
 												<li key={idx}>{achievement}</li>
