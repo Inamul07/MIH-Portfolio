@@ -30,23 +30,23 @@ const LeetCodeStats = () => {
 				}
 			}
 
-			// Try multiple API endpoints
+			// Try multiple API endpoints (faster one first)
 			const apiEndpoints = [
-				`https://leetcode-stats-api.herokuapp.com/${username}`,
 				`https://leetcode-api-faisalshohag.vercel.app/${username}`,
+				`https://leetcode-stats-api.herokuapp.com/${username}`,
 			];
 
 			for (const endpoint of apiEndpoints) {
 				try {
 					const response = await axios.get(endpoint, {
-						timeout: 8000,
+						timeout: 5000,
 						headers: {
 							Accept: "application/json",
 						},
 					});
 
 					const data = response.data;
-					console.log("LeetCode API Response:", data); // Debug log
+					console.log("LeetCode API Response from", endpoint, ":", data); // Debug log
 
 					// Parse the response based on API structure
 					let easySolved = 0;
@@ -59,8 +59,20 @@ const LeetCodeStats = () => {
 						easySolved = data.easySolved || 0;
 						mediumSolved = data.mediumSolved || 0;
 						hardSolved = data.hardSolved || 0;
-					} else if (data.submitStats?.acSubmissionNum) {
+					} else if (data.matchedUserStats?.acSubmissionNum) {
 						// Parse from acSubmissionNum array
+						const acStats = data.matchedUserStats.acSubmissionNum;
+						easySolved =
+							acStats.find((s) => s.difficulty === "Easy")
+								?.count || 0;
+						mediumSolved =
+							acStats.find((s) => s.difficulty === "Medium")
+								?.count || 0;
+						hardSolved =
+							acStats.find((s) => s.difficulty === "Hard")
+								?.count || 0;
+					} else if (data.submitStats?.acSubmissionNum) {
+						// Fallback for other API format
 						const acStats = data.submitStats.acSubmissionNum;
 						easySolved =
 							acStats.find((s) => s.difficulty === "Easy")
@@ -74,11 +86,23 @@ const LeetCodeStats = () => {
 					}
 
 					// Get acceptance rate
-					if (data.acceptanceRate) {
-						acceptanceRate = parseFloat(
-							data.acceptanceRate,
-						).toFixed(1);
-					} else if (data.submitStats?.acSubmissionNum) {
+					if (data.acceptanceRate !== undefined && data.acceptanceRate !== null) {
+						// Direct acceptance rate from API
+						const rate = parseFloat(data.acceptanceRate);
+						acceptanceRate = isNaN(rate) ? 0 : rate.toFixed(1);
+					} else if (data.matchedUserStats?.acSubmissionNum && data.matchedUserStats?.totalSubmissionNum) {
+						// Calculate from matchedUserStats (accepted submissions / total submissions)
+						const totalAccepted =
+							data.matchedUserStats.acSubmissionNum.find(
+								(s) => s.difficulty === "All",
+							)?.submissions || 0;
+						const totalSubmissions =
+							data.matchedUserStats.totalSubmissionNum.find(
+								(s) => s.difficulty === "All",
+							)?.submissions || 0;
+						acceptanceRate = totalSubmissions > 0 ? ((totalAccepted / totalSubmissions) * 100).toFixed(1) : 0;
+					} else if (data.submitStats?.acSubmissionNum && data.submitStats?.totalSubmissionNum) {
+						// Fallback for other API format
 						const totalAc =
 							data.submitStats.acSubmissionNum.find(
 								(s) => s.difficulty === "All",
@@ -86,10 +110,8 @@ const LeetCodeStats = () => {
 						const totalSub =
 							data.submitStats.totalSubmissionNum.find(
 								(s) => s.difficulty === "All",
-							)?.submissions || 1;
-						acceptanceRate = ((totalAc / totalSub) * 100).toFixed(
-							1,
-						);
+							)?.count || 0;
+						acceptanceRate = totalSub > 0 ? ((totalAc / totalSub) * 100).toFixed(1) : 0;
 					}
 
 					const leetcodeStats = {
