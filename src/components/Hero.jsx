@@ -104,8 +104,7 @@ const Hero = () => {
 							<span className="typing-cursor">|</span>
 						</h2>
 						<p className="hero-description">
-							Building digital universes and exploring the
-							horizons of code, one line at a time.
+							{portfolioData.personal.tagline}
 						</p>
 					</motion.div>
 

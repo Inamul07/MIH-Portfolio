@@ -9,7 +9,8 @@ const portfolioData = {
 			"Tech Enthusiast",
 			"Philomath",
 		],
-		tagline: "",
+		tagline:
+			"Building digital universes and exploring the horizons of code, one line at a time.",
 		email: "mohammedinamul87@gmail.com",
 		location: "Chennai, India",
 		github: "Inamul07",
