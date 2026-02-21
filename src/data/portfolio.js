@@ -53,6 +53,7 @@ const portfolioData = {
 			github: "https://github.com",
 			demo: "https://example.com",
 			image: "https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Project+1",
+			wip: true,
 		},
 		{
 			title: "Task Management App",

@@ -57,6 +57,12 @@ const Projects = () => {
 							variants={itemVariants}
 						>
 							<div className="project-image">
+								{" "}
+								{project.wip && (
+									<div className="wip-badge">
+										Work in Progress
+									</div>
+								)}{" "}
 								<img src={project.image} alt={project.title} />
 								<div className="project-overlay">
 									{project.github && (

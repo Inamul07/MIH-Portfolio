@@ -46,7 +46,12 @@ const LeetCodeStats = () => {
 					});
 
 					const data = response.data;
-					console.log("LeetCode API Response from", endpoint, ":", data); // Debug log
+					console.log(
+						"LeetCode API Response from",
+						endpoint,
+						":",
+						data,
+					); // Debug log
 
 					// Parse the response based on API structure
 					let easySolved = 0;
@@ -86,11 +91,17 @@ const LeetCodeStats = () => {
 					}
 
 					// Get acceptance rate
-					if (data.acceptanceRate !== undefined && data.acceptanceRate !== null) {
+					if (
+						data.acceptanceRate !== undefined &&
+						data.acceptanceRate !== null
+					) {
 						// Direct acceptance rate from API
 						const rate = parseFloat(data.acceptanceRate);
 						acceptanceRate = isNaN(rate) ? 0 : rate.toFixed(1);
-					} else if (data.matchedUserStats?.acSubmissionNum && data.matchedUserStats?.totalSubmissionNum) {
+					} else if (
+						data.matchedUserStats?.acSubmissionNum &&
+						data.matchedUserStats?.totalSubmissionNum
+					) {
 						// Calculate from matchedUserStats (accepted submissions / total submissions)
 						const totalAccepted =
 							data.matchedUserStats.acSubmissionNum.find(
@@ -100,8 +111,17 @@ const LeetCodeStats = () => {
 							data.matchedUserStats.totalSubmissionNum.find(
 								(s) => s.difficulty === "All",
 							)?.submissions || 0;
-						acceptanceRate = totalSubmissions > 0 ? ((totalAccepted / totalSubmissions) * 100).toFixed(1) : 0;
-					} else if (data.submitStats?.acSubmissionNum && data.submitStats?.totalSubmissionNum) {
+						acceptanceRate =
+							totalSubmissions > 0
+								? (
+										(totalAccepted / totalSubmissions) *
+										100
+									).toFixed(1)
+								: 0;
+					} else if (
+						data.submitStats?.acSubmissionNum &&
+						data.submitStats?.totalSubmissionNum
+					) {
 						// Fallback for other API format
 						const totalAc =
 							data.submitStats.acSubmissionNum.find(
@@ -111,7 +131,10 @@ const LeetCodeStats = () => {
 							data.submitStats.totalSubmissionNum.find(
 								(s) => s.difficulty === "All",
 							)?.count || 0;
-						acceptanceRate = totalSub > 0 ? ((totalAc / totalSub) * 100).toFixed(1) : 0;
+						acceptanceRate =
+							totalSub > 0
+								? ((totalAc / totalSub) * 100).toFixed(1)
+								: 0;
 					}
 
 					const leetcodeStats = {
