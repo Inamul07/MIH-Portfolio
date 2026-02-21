@@ -1,19 +1,5 @@
-// Import project images
-import r2d2Image from "../assets/R2D2/r2d2.png";
-import hammerSpaceChatImage1 from "../assets/HammerSpaceChat/hammerspace_chat_1.png";
-import hammerSpaceChatImage2 from "../assets/HammerSpaceChat/hammerspace_chat_2.png";
-import drugExImage1 from "../assets/DrugEx/drugex_1.jpg";
-import drugExImage2 from "../assets/DrugEx/drugex_2.jpg";
-import drugExImage3 from "../assets/DrugEx/drugex_3.png";
-import drugExImage4 from "../assets/DrugEx/drugex_4.jpg";
-import todoApplicationImage1 from "../assets/ToDoApplication/todo_application_1.png";
-import todoApplicationImage2 from "../assets/ToDoApplication/todo_application_2.png";
-import todoApplicationImage3 from "../assets/ToDoApplication/todo_application_3.png";
-import todoApplicationImage4 from "../assets/ToDoApplication/todo_application_4.png";
-import housingPricePredictionImage from "../assets/HousingPricePrediction/housing_price_prediction.png";
-import iTunesImage from "../assets/ITunes/itunes_1.png";
-import randomFinderImage from "../assets/RandomFinder/random_finder_1.png";
-import expenserImage from "../assets/Expenser/expenser_1.jpg";
+// Import project images dynamically
+import { getProjectImage, getProjectImages } from "./projectImages";
 
 const portfolioData = {
 	personal: {
@@ -68,7 +54,7 @@ const portfolioData = {
 				"R2D2 is a Discord bot designed to help friends stay in touch by sending automatic notifications when someone joins a voice channel.",
 			tech: ["Java", "Discord-Bot", "JDA"],
 			github: "https://github.com/Inamul07/R2D2",
-			image: r2d2Image,
+			image: getProjectImage("R2D2"),
 		},
 		{
 			title: "HammerSpace Chat",
@@ -76,7 +62,7 @@ const portfolioData = {
 				"HammerSpace Chat is a modern, modular desktop chat application built with Electron, React, TypeScript, and SQLite.",
 			tech: ["Typescript", "electronjs", "llm-api"],
 			github: "https://github.com/Inamul07/hammerspace-chat",
-			images: [hammerSpaceChatImage1, hammerSpaceChatImage2],
+			images: getProjectImages("HammerSpaceChat"),
 		},
 		{
 			title: "DrugEx - The Drug Extinctor App",
@@ -84,7 +70,7 @@ const portfolioData = {
 				"A mobile-based crime reporting system designed to combat drug trafficking through community engagement.",
 			tech: ["React-Native", "MongoDB", "FastAPI"],
 			github: "https://github.com/Inamul07/DrugEx2.0",
-			images: [drugExImage1, drugExImage2, drugExImage3, drugExImage4],
+			images: getProjectImages("DrugEx"),
 		},
 		{
 			title: "Crach The CI",
@@ -101,12 +87,7 @@ const portfolioData = {
 				"A full-stack Todo application built with Spring Boot and React that enables users to manage their tasks efficiently with features like task prioritization, status tracking, and due date management.",
 			tech: ["Java", "Spring-Boot", "React", "Postgresql"],
 			github: "https://github.com/Inamul07/Todo-Application",
-			images: [
-				todoApplicationImage1,
-				todoApplicationImage2,
-				todoApplicationImage3,
-				todoApplicationImage4,
-			],
+			images: getProjectImages("ToDoApplication"),
 		},
 		{
 			title: "Housing Price Prediction",
@@ -114,7 +95,7 @@ const portfolioData = {
 				"A machine learning-powered web application that predicts housing prices in Chennai, India based on various property features.",
 			tech: ["Python", "Flask", "Machine-Learning"],
 			github: "https://github.com/Inamul07/Housing-Price-Prediction",
-			image: housingPricePredictionImage,
+			image: getProjectImage("HousingPricePrediction"),
 		},
 		{
 			title: "Expenser",
@@ -122,7 +103,7 @@ const portfolioData = {
 				"An Android expense tracking application that helps users manage their finances by creating multiple ledgers and tracking credit and debit transactions.",
 			tech: ["Java", "Android", "Gradle"],
 			github: "https://github.com/Inamul07/Expenser",
-			image: expenserImage,
+			image: getProjectImage("Expenser"),
 		},
 		{
 			title: "ITunes",
@@ -130,7 +111,7 @@ const portfolioData = {
 				"A responsive web application that allows users to search for music albums using the iTunes Search API.",
 			tech: ["HTML", "CSS", "Javascript"],
 			github: "https://github.com/Inamul07/ITunes",
-			image: iTunesImage,
+			image: getProjectImage("ITunes"),
 			demo: "https://inamul07.github.io/ITunes/",
 		},
 		{
@@ -139,7 +120,7 @@ const portfolioData = {
 				"A simple, elegant web application for randomly selecting a winner from a list of participants.",
 			tech: ["HTML", "CSS", "Javascript"],
 			github: "https://github.com/Inamul07/RandomFinder",
-			image: randomFinderImage,
+			image: getProjectImage("RandomFinder"),
 			demo: "https://inamul07.github.io/RandomFinder/",
 		},
 	],
