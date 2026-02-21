@@ -51,7 +51,6 @@ const portfolioData = {
 				"A full-stack e-commerce platform with user authentication, product management, and payment integration.",
 			tech: ["React", "Node.js", "MongoDB", "Stripe"],
 			github: "https://github.com",
-			demo: "https://example.com",
 			image: "https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Project+1",
 			wip: true,
 		},
