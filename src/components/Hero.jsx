@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import portfolioData from "../data/portfolio";
 import personImage from "../assets/Portfolio.png";
 import "./Hero.css";
@@ -114,6 +114,14 @@ const Hero = () => {
 						</a>
 						<a href="#projects" className="btn btn-secondary">
 							View My Work
+						</a>
+						<a
+							href={portfolioData.personal.resume}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="btn btn-secondary"
+						>
+							<FaFileAlt /> View Resume
 						</a>
 					</motion.div>
 

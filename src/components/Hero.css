@@ -89,7 +89,14 @@
 	font-weight: 600;
 	font-size: 1rem;
 	transition: all 0.3s ease;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	justify-content: center;
+}
+
+.btn svg {
+	font-size: 1.1rem;
 }
 
 .btn-primary {
