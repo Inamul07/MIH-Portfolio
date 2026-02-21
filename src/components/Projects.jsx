@@ -61,16 +61,25 @@ const Projects = () => {
 								<motion.div
 									key={project.title}
 									className="project-card"
-									initial={{ y: 20, opacity: 0, scale: 0.95 }}
-									animate={{ y: 0, opacity: 1, scale: 1 }}
+									initial={
+										isInitialProject
+											? { y: 50, opacity: 0 }
+											: false
+									}
+									animate={
+										isInitialProject && isInView
+											? { y: 0, opacity: 1 }
+											: { y: 0, opacity: 1 }
+									}
 									exit={{ y: 20, opacity: 0, scale: 0.95 }}
-									transition={{
-										duration: 0.5,
-										delay:
-											isInView && isInitialProject
-												? index * 0.1
-												: 0,
-									}}
+									transition={
+										isInitialProject
+											? {
+													duration: 0.6,
+													delay: index * 0.15,
+												}
+											: { duration: 0.3 }
+									}
 								>
 									<div className="project-image">
 										{project.wip && (
@@ -159,7 +168,7 @@ const Projects = () => {
 								? { opacity: 1, y: 0 }
 								: { opacity: 0, y: 20 }
 						}
-						transition={{ duration: 0.6, delay: 0.4 }}
+						transition={{ duration: 0.6, delay: 1.0 }}
 					>
 						<button
 							className="btn btn-secondary show-more-btn"
