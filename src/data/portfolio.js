@@ -1,5 +1,6 @@
 // Import project images dynamically
 import { getProjectImage, getProjectImages } from "./projectImages";
+import resumePdf from "../assets/inamul_resume.pdf";
 
 const portfolioData = {
 	personal: {
@@ -19,6 +20,7 @@ const portfolioData = {
 		github: "Inamul07",
 		linkedin: "https://www.linkedin.com/in/mih07/",
 		leetcode: "07_ajax",
+		resume: resumePdf,
 	},
 
 	about: {
@@ -73,7 +75,7 @@ const portfolioData = {
 			images: getProjectImages("DrugEx"),
 		},
 		{
-			title: "Crach The CI",
+			title: "Crack The CI",
 			description:
 				"A platform for sharing and discovering company interview experiences.",
 			tech: ["React-Native", "MongoDB", "FastAPI"],
