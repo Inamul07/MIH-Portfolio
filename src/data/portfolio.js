@@ -1,8 +1,15 @@
 // Import project images
 import r2d2Image from "../assets/R2D2/r2d2.png";
-import hammerSpaceChatImage from "../assets/HammerSpaceChat/hammerspace_chat_1.png";
-import drugExImage from "../assets/DrugEx/drugex_1.jpg";
-import todoApplicationImage from "../assets/ToDoApplication/todo_application_1.png";
+import hammerSpaceChatImage1 from "../assets/HammerSpaceChat/hammerspace_chat_1.png";
+import hammerSpaceChatImage2 from "../assets/HammerSpaceChat/hammerspace_chat_2.png";
+import drugExImage1 from "../assets/DrugEx/drugex_1.jpg";
+import drugExImage2 from "../assets/DrugEx/drugex_2.jpg";
+import drugExImage3 from "../assets/DrugEx/drugex_3.png";
+import drugExImage4 from "../assets/DrugEx/drugex_4.jpg";
+import todoApplicationImage1 from "../assets/ToDoApplication/todo_application_1.png";
+import todoApplicationImage2 from "../assets/ToDoApplication/todo_application_2.png";
+import todoApplicationImage3 from "../assets/ToDoApplication/todo_application_3.png";
+import todoApplicationImage4 from "../assets/ToDoApplication/todo_application_4.png";
 import housingPricePredictionImage from "../assets/HousingPricePrediction/housing_price_prediction.png";
 import iTunesImage from "../assets/ITunes/itunes_1.png";
 import randomFinderImage from "../assets/RandomFinder/random_finder_1.png";
@@ -69,7 +76,7 @@ const portfolioData = {
 				"HammerSpace Chat is a modern, modular desktop chat application built with Electron, React, TypeScript, and SQLite.",
 			tech: ["Typescript", "electronjs", "llm-api"],
 			github: "https://github.com/Inamul07/hammerspace-chat",
-			image: hammerSpaceChatImage,
+			images: [hammerSpaceChatImage1, hammerSpaceChatImage2],
 		},
 		{
 			title: "DrugEx - The Drug Extinctor App",
@@ -77,7 +84,7 @@ const portfolioData = {
 				"A mobile-based crime reporting system designed to combat drug trafficking through community engagement.",
 			tech: ["React-Native", "MongoDB", "FastAPI"],
 			github: "https://github.com/Inamul07/DrugEx2.0",
-			image: drugExImage,
+			images: [drugExImage1, drugExImage2, drugExImage3, drugExImage4],
 		},
 		{
 			title: "Crach The CI",
@@ -94,7 +101,12 @@ const portfolioData = {
 				"A full-stack Todo application built with Spring Boot and React that enables users to manage their tasks efficiently with features like task prioritization, status tracking, and due date management.",
 			tech: ["Java", "Spring-Boot", "React", "Postgresql"],
 			github: "https://github.com/Inamul07/Todo-Application",
-			image: todoApplicationImage,
+			images: [
+				todoApplicationImage1,
+				todoApplicationImage2,
+				todoApplicationImage3,
+				todoApplicationImage4,
+			],
 		},
 		{
 			title: "Housing Price Prediction",

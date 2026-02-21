@@ -52,6 +52,24 @@
 	backdrop-filter: blur(8px);
 }
 
+.image-count-badge {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	background: rgba(0, 0, 0, 0.7);
+	color: var(--text-primary);
+	padding: 0.4rem 0.8rem;
+	border-radius: 6px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	z-index: 10;
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
 .project-image img {
 	max-width: 100%;
 	max-height: 100%;
@@ -95,6 +113,8 @@
 	border: 2px solid var(--accent-primary);
 	min-width: 150px;
 	justify-content: center;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .project-icon:hover {
@@ -106,6 +126,17 @@
 
 .project-icon svg {
 	font-size: 1.1rem;
+}
+
+.view-images-btn {
+	background: transparent;
+	border-color: var(--accent-primary);
+	color: var(--accent-primary);
+}
+
+.view-images-btn:hover {
+	background: var(--accent-primary);
+	color: var(--text-primary);
 }
 
 .project-content {
