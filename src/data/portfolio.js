@@ -1,3 +1,13 @@
+// Import project images
+import r2d2Image from "../assets/R2D2/r2d2.png";
+import hammerSpaceChatImage from "../assets/HammerSpaceChat/hammerspace_chat_1.png";
+import drugExImage from "../assets/DrugEx/drugex_1.jpg";
+import todoApplicationImage from "../assets/ToDoApplication/todo_application_1.png";
+import housingPricePredictionImage from "../assets/HousingPricePrediction/housing_price_prediction.png";
+import iTunesImage from "../assets/ITunes/itunes_1.png";
+import randomFinderImage from "../assets/RandomFinder/random_finder_1.png";
+import expenserImage from "../assets/Expenser/expenser_1.jpg";
+
 const portfolioData = {
 	personal: {
 		name: "Mohammed Inamul Hassan M",
@@ -46,40 +56,79 @@ const portfolioData = {
 
 	projects: [
 		{
-			title: "E-Commerce Platform",
+			title: "R2D2",
 			description:
-				"A full-stack e-commerce platform with user authentication, product management, and payment integration.",
-			tech: ["React", "Node.js", "MongoDB", "Stripe"],
-			github: "https://github.com",
+				"R2D2 is a Discord bot designed to help friends stay in touch by sending automatic notifications when someone joins a voice channel.",
+			tech: ["Java", "Discord-Bot", "JDA"],
+			github: "https://github.com/Inamul07/R2D2",
+			image: r2d2Image,
+		},
+		{
+			title: "HammerSpace Chat",
+			description:
+				"HammerSpace Chat is a modern, modular desktop chat application built with Electron, React, TypeScript, and SQLite.",
+			tech: ["Typescript", "electronjs", "llm-api"],
+			github: "https://github.com/Inamul07/hammerspace-chat",
+			image: hammerSpaceChatImage,
+		},
+		{
+			title: "DrugEx - The Drug Extinctor App",
+			description:
+				"A mobile-based crime reporting system designed to combat drug trafficking through community engagement.",
+			tech: ["React-Native", "MongoDB", "FastAPI"],
+			github: "https://github.com/Inamul07/DrugEx2.0",
+			image: drugExImage,
+		},
+		{
+			title: "Crach The CI",
+			description:
+				"A platform for sharing and discovering company interview experiences.",
+			tech: ["React-Native", "MongoDB", "FastAPI"],
+			github: "https://github.com/Inamul07/CrackTheCIv2.0",
 			image: "https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Project+1",
 			wip: true,
 		},
 		{
-			title: "Task Management App",
+			title: "ToDo Application",
 			description:
-				"A collaborative task management application with real-time updates and team collaboration features.",
-			tech: ["React", "Firebase", "Tailwind CSS"],
-			github: "https://github.com",
-			demo: "https://example.com",
-			image: "https://via.placeholder.com/400x250/1a1a1a/60a5fa?text=Project+2",
+				"A full-stack Todo application built with Spring Boot and React that enables users to manage their tasks efficiently with features like task prioritization, status tracking, and due date management.",
+			tech: ["Java", "Spring-Boot", "React", "Postgresql"],
+			github: "https://github.com/Inamul07/Todo-Application",
+			image: todoApplicationImage,
 		},
 		{
-			title: "Weather Dashboard",
+			title: "Housing Price Prediction",
 			description:
-				"A weather forecasting dashboard with interactive maps and detailed weather information.",
-			tech: ["Vue.js", "API Integration", "Chart.js"],
-			github: "https://github.com",
-			demo: "https://example.com",
-			image: "https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Project+3",
+				"A machine learning-powered web application that predicts housing prices in Chennai, India based on various property features.",
+			tech: ["Python", "Flask", "Machine-Learning"],
+			github: "https://github.com/Inamul07/Housing-Price-Prediction",
+			image: housingPricePredictionImage,
 		},
 		{
-			title: "Social Media Analytics",
+			title: "Expenser",
 			description:
-				"Analytics dashboard for tracking social media metrics and engagement across multiple platforms.",
-			tech: ["Python", "Django", "PostgreSQL", "D3.js"],
-			github: "https://github.com",
-			demo: "https://example.com",
-			image: "https://via.placeholder.com/400x250/1a1a1a/60a5fa?text=Project+4",
+				"An Android expense tracking application that helps users manage their finances by creating multiple ledgers and tracking credit and debit transactions.",
+			tech: ["Java", "Android", "Gradle"],
+			github: "https://github.com/Inamul07/Expenser",
+			image: expenserImage,
+		},
+		{
+			title: "ITunes",
+			description:
+				"A responsive web application that allows users to search for music albums using the iTunes Search API.",
+			tech: ["HTML", "CSS", "Javascript"],
+			github: "https://github.com/Inamul07/ITunes",
+			image: iTunesImage,
+			demo: "https://inamul07.github.io/ITunes/",
+		},
+		{
+			title: "RandomFinder",
+			description:
+				"A simple, elegant web application for randomly selecting a winner from a list of participants.",
+			tech: ["HTML", "CSS", "Javascript"],
+			github: "https://github.com/Inamul07/RandomFinder",
+			image: randomFinderImage,
+			demo: "https://inamul07.github.io/RandomFinder/",
 		},
 	],
 
