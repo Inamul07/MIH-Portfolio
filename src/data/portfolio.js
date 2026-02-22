@@ -122,7 +122,7 @@ const portfolioData = {
 				"A simple, elegant web application for randomly selecting a winner from a list of participants.",
 			tech: ["HTML", "CSS", "Javascript"],
 			github: "https://github.com/Inamul07/RandomFinder",
-			image: getProjectImage("RandomFinder"),
+			images: getProjectImages("RandomFinder"),
 			demo: "https://inamul07.github.io/RandomFinder/",
 		},
 	],
