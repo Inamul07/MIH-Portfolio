@@ -33,13 +33,14 @@ const GitHubStats = () => {
 					0,
 				);
 
-				// Fetch streak and commit data from GitHub Streak Stats API
+				// Fetch streak and commit data via proxy API
 				let totalCommits = 0;
 				let longestStreak = 0;
 
 				try {
+					// Use proxy API to avoid CORS (Vite proxy in dev, Vercel function in production)
 					const streakResponse = await axios.get(
-						`https://github-readme-streak-stats.herokuapp.com/?user=${username}&type=json`,
+						`/api/github-streak?username=${username}`,
 						{ timeout: 10000 },
 					);
 
@@ -51,10 +52,9 @@ const GitHubStats = () => {
 					}
 				} catch (streakError) {
 					console.warn(
-						"Streak stats unavailable (works after deployment):",
+						"Streak stats unavailable:",
 						streakError.message,
 					);
-					// Set to 0 for now, will work after deployment
 					totalCommits = 0;
 					longestStreak = 0;
 				}
