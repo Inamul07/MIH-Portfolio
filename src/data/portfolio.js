@@ -51,20 +51,20 @@ const portfolioData = {
 
 	projects: [
 		{
+			title: "HammerSpace Chat",
+			description:
+				"An AI Chat application with Normal Chat and RAG (Retrieval-Augmented Generation) modes built with Electron, React, and PostgreSQL.",
+			tech: ["Typescript", "electronjs", "llm-api"],
+			github: "https://github.com/Inamul07/HammerSpaceChat",
+			images: getProjectImages("HammerSpaceChat"),
+		},
+		{
 			title: "R2D2",
 			description:
 				"R2D2 is a Discord bot designed to help friends stay in touch by sending automatic notifications when someone joins a voice channel.",
 			tech: ["Java", "Discord-Bot", "JDA"],
 			github: "https://github.com/Inamul07/R2D2",
 			image: getProjectImage("R2D2"),
-		},
-		{
-			title: "HammerSpace Chat",
-			description:
-				"HammerSpace Chat is a modern, modular desktop chat application built with Electron, React, TypeScript, and SQLite.",
-			tech: ["Typescript", "electronjs", "llm-api"],
-			github: "https://github.com/Inamul07/hammerspace-chat",
-			images: getProjectImages("HammerSpaceChat"),
 		},
 		{
 			title: "DrugEx - The Drug Extinctor App",
