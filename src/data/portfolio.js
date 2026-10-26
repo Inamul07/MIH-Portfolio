@@ -51,6 +51,24 @@ const portfolioData = {
 
 	projects: [
 		{
+			title: "Hexis",
+			description:
+				"A gamified habit and task tracker — build streaks, schedule tasks, switch between profiles and add notes by voice. Offline-first, syncing to a Spring Boot service, and runs on Android, iOS, macOS, Linux, Windows and the web from one Flutter codebase.",
+			tech: ["Flutter", "Dart", "Spring-Boot", "PostgreSQL"],
+			demo: "https://hexis.hammerspace.in",
+			images: getProjectImages("Hexis"),
+			featured: true,
+		},
+		{
+			title: "HackFeed",
+			description:
+				"A Hacker News reader that keeps you on the page — read an article and its comments side by side, save stories into your own lists, get recommendations from what you like, and summarise anything with your own AI key.",
+			tech: ["React", "TypeScript", "Spring-Boot", "PostgreSQL"],
+			demo: "https://hackfeed.hammerspace.in",
+			images: getProjectImages("HackFeed"),
+			featured: true,
+		},
+		{
 			title: "HammerSpace Chat",
 			description:
 				"An AI Chat application with Normal Chat and RAG (Retrieval-Augmented Generation) modes built with Electron, React, and PostgreSQL.",
@@ -73,23 +91,6 @@ const portfolioData = {
 			tech: ["React-Native", "MongoDB", "FastAPI"],
 			github: "https://github.com/Inamul07/DrugEx2.0",
 			images: getProjectImages("DrugEx"),
-		},
-		{
-			title: "Crack The CI",
-			description:
-				"A platform for sharing and discovering company interview experiences.",
-			tech: ["React-Native", "MongoDB", "FastAPI"],
-			github: "https://github.com/Inamul07/CrackTheCIv2.0",
-			image: "https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Project+1",
-			wip: true,
-		},
-		{
-			title: "ToDo Application",
-			description:
-				"A full-stack Todo application built with Spring Boot and React that enables users to manage their tasks efficiently with features like task prioritization, status tracking, and due date management.",
-			tech: ["Java", "Spring-Boot", "React", "Postgresql"],
-			github: "https://github.com/Inamul07/Todo-Application",
-			images: getProjectImages("ToDoApplication"),
 		},
 		{
 			title: "Housing Price Prediction",

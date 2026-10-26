@@ -1,146 +1,116 @@
 .navbar {
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 1000;
-	padding: 1rem 2rem;
-	transition: all 0.3s ease;
-	background: rgba(10, 10, 10, 0.8);
-	backdrop-filter: blur(10px);
+	inset: 0 0 auto 0;
+	z-index: 100;
+	height: var(--nav-height);
+	background: var(--canvas);
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.2s ease;
 }
 
 .navbar.scrolled {
-	background: rgba(10, 10, 10, 0.95);
-	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+	border-bottom-color: var(--hairline);
 }
 
 .nav-container {
-	max-width: 1400px;
-	margin: 0 auto;
+	height: 100%;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-lg);
 }
 
 .nav-logo {
-	font-size: 1.8rem;
-	font-weight: 700;
-	color: var(--text-primary);
-	z-index: 1001;
+	font-family: var(--font-display);
+	font-size: 26px;
+	line-height: 1;
+	letter-spacing: -0.5px;
+	color: var(--ink);
 }
 
-.logo-text {
-	background: linear-gradient(
-		135deg,
-		var(--accent-primary),
-		var(--accent-secondary)
-	);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+.nav-logo:hover {
+	color: var(--ink);
+}
+
+.nav-logo-dot {
+	color: var(--primary);
 }
 
 .nav-links {
 	display: flex;
-	list-style: none;
-	gap: 2.5rem;
+	align-items: center;
+	gap: var(--space-xs);
+	margin-right: auto;
+	margin-left: var(--space-xl);
 }
 
-.nav-links li a {
-	color: var(--text-secondary);
+.nav-links a {
+	display: inline-block;
+	padding: 8px 12px;
+	border-radius: var(--rounded-md);
+	color: var(--muted);
+	font-size: 14px;
 	font-weight: 500;
-	font-size: 1rem;
-	position: relative;
-	transition: color 0.3s ease;
+	line-height: 1.4;
+	transition:
+		color 0.15s ease,
+		background-color 0.15s ease;
 }
 
-.nav-links li a:hover {
-	color: var(--accent-primary);
+.nav-links a:hover,
+.nav-links a:active {
+	color: var(--ink);
+	background: var(--surface-card);
 }
 
-.nav-links li a::after {
-	content: "";
-	position: absolute;
-	bottom: -5px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background: var(--accent-primary);
-	transition: width 0.3s ease;
+.nav-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
 }
 
-.nav-links li a:hover::after {
-	width: 100%;
-}
-
-.nav-menu-icon {
+.nav-menu-btn {
 	display: none;
-	font-size: 1.8rem;
-	color: var(--text-primary);
-	cursor: pointer;
-	z-index: 1001;
 }
 
+/* Full-screen cream sheet on mobile */
 .mobile-menu {
-	display: none;
+	position: fixed;
+	inset: var(--nav-height) 0 0 0;
+	background: var(--canvas);
+	padding: var(--space-xl) var(--gutter)
+		calc(var(--space-xl) + env(safe-area-inset-bottom));
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xl);
+	overscroll-behavior: contain;
 }
 
-@media (max-width: 768px) {
-	.navbar {
-		padding: 1rem 1.5rem;
-	}
+.mobile-nav-links li + li {
+	border-top: 1px solid var(--hairline-soft);
+}
 
-	.nav-links {
+.mobile-nav-links a {
+	display: block;
+	padding: var(--space-md) 0;
+	font-family: var(--font-display);
+	font-size: 32px;
+	line-height: 1.2;
+	letter-spacing: -0.5px;
+	color: var(--ink);
+}
+
+.mobile-resume {
+	align-self: flex-start;
+}
+
+@media (max-width: 860px) {
+	.nav-links,
+	.nav-resume {
 		display: none;
 	}
 
-	.nav-menu-icon {
-		display: block;
-	}
-
-	.mobile-menu {
-		display: block;
-		position: fixed;
-		top: 0;
-		right: 0;
-		width: 70%;
-		max-width: 300px;
-		height: 100vh;
-		background: var(--bg-secondary);
-		border-left: 1px solid var(--border-color);
-		padding: 5rem 2rem 2rem;
-		z-index: 1000;
-	}
-
-	.mobile-nav-links {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	.mobile-nav-links li a {
-		color: var(--text-primary);
-		font-size: 1.2rem;
-		font-weight: 500;
-		display: block;
-		padding: 0.5rem 0;
-		transition: all 0.3s ease;
-	}
-
-	.mobile-nav-links li a:hover {
-		color: var(--accent-primary);
-		transform: translateX(10px);
-	}
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-	.nav-links {
-		gap: 1.5rem;
-	}
-
-	.nav-links li a {
-		font-size: 0.95rem;
+	.nav-menu-btn {
+		display: inline-flex;
 	}
 }

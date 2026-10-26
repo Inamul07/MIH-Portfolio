@@ -93,127 +93,105 @@ const GitHubStats = () => {
 	};
 
 	const itemVariants = {
-		hidden: { scale: 0.8, opacity: 0 },
+		hidden: { y: 16, opacity: 0 },
 		visible: {
-			scale: 1,
+			y: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.5,
-			},
+			transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 		},
 	};
 
-	return (
-		<section className="github-stats" ref={ref}>
-			<div className="container">
-				<motion.div
-					className="stats-header"
-					initial={{ opacity: 0, y: 30 }}
-					animate={
-						isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-					}
-					transition={{ duration: 0.6 }}
-				>
-					<FaGithub className="stats-icon" />
-					<h2>GitHub Statistics</h2>
-				</motion.div>
+	const statItems = stats
+		? [
+				{ label: "Public Repositories", value: stats.publicRepos },
+				{
+					label: "Total Stars",
+					value: stats.totalStars,
+					icon: <FaStar aria-hidden="true" />,
+				},
+				{
+					label: "Total Forks",
+					value: stats.totalForks,
+					icon: <FaCodeBranch aria-hidden="true" />,
+				},
+				{ label: "Followers", value: stats.followers },
+				{
+					label: "Total Commits",
+					value:
+						stats.totalCommits > 0
+							? stats.totalCommits.toLocaleString()
+							: "N/A",
+				},
+				{
+					label: "Longest Streak",
+					value:
+						stats.longestStreak > 0
+							? `${stats.longestStreak} days`
+							: "N/A",
+				},
+			]
+		: [];
 
+	return (
+		<motion.article
+			className="stats-panel github-stats"
+			ref={ref}
+			initial={{ opacity: 0, y: 24 }}
+			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+			transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+		>
+			<header className="stats-panel-header">
+				<FaGithub className="stats-icon" aria-hidden="true" />
+				<div>
+					<h3>GitHub</h3>
+					<p>@{username}</p>
+				</div>
+			</header>
+
+			<div className="stats-panel-body" aria-live="polite">
 				{loading ? (
-					<div className="loading">
-						<div className="loader"></div>
-						<p>Loading GitHub stats...</p>
+					<div className="stats-loading">
+						<div className="loader" aria-hidden="true"></div>
+						<p>Loading GitHub stats…</p>
 					</div>
 				) : stats ? (
-					<motion.div
+					<motion.dl
 						className="stats-grid"
 						variants={containerVariants}
 						initial="hidden"
-						animate={isInView ? "visible" : "hidden"}
+						animate="visible"
 					>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.publicRepos}
-							</div>
-							<div className="stat-label">
-								Public Repositories
-							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">{stats.totalStars}</div>
-							<div className="stat-label">
-								<FaStar /> Total Stars
-							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">{stats.totalForks}</div>
-							<div className="stat-label">
-								<FaCodeBranch /> Total Forks
-							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">{stats.followers}</div>
-							<div className="stat-label">Followers</div>
-						</motion.div>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.totalCommits > 0
-									? stats.totalCommits.toLocaleString()
-									: "N/A"}
-							</div>
-							<div className="stat-label">Total Commits</div>
-						</motion.div>
-						<motion.div
-							className="stat-card"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.longestStreak > 0
-									? `${stats.longestStreak} days`
-									: "N/A"}
-							</div>
-							<div className="stat-label">Longest Streak</div>
-						</motion.div>
-					</motion.div>
+						{statItems.map((item) => (
+							<motion.div
+								key={item.label}
+								className="stat-item"
+								variants={itemVariants}
+							>
+								<dt className="stat-label">
+									{item.icon}
+									{item.label}
+								</dt>
+								<dd className="stat-value">{item.value}</dd>
+							</motion.div>
+						))}
+					</motion.dl>
 				) : (
-					<div className="error-message">
-						<p>
-							Unable to load GitHub stats. Please try again later.
-						</p>
-					</div>
+					<p className="stats-error">
+						GitHub stats couldn’t be loaded right now. The full
+						profile is one click away.
+					</p>
 				)}
-
-				<motion.div
-					className="github-link"
-					initial={{ opacity: 0 }}
-					animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-					transition={{ delay: 0.8 }}
-				>
-					<a
-						href={`https://github.com/${username}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="btn btn-secondary"
-					>
-						<FaGithub /> View GitHub Profile
-					</a>
-				</motion.div>
 			</div>
-		</section>
+
+			<a
+				href={`https://github.com/${username}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				className="btn btn-on-dark"
+			>
+				<FaGithub aria-hidden="true" /> View GitHub Profile
+			</a>
+		</motion.article>
 	);
 };
 

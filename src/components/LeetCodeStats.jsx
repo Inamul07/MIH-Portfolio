@@ -206,131 +206,128 @@ const LeetCodeStats = () => {
 	};
 
 	const itemVariants = {
-		hidden: { scale: 0.8, opacity: 0 },
+		hidden: { y: 16, opacity: 0 },
 		visible: {
-			scale: 1,
+			y: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.5,
-			},
+			transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 		},
 	};
 
-	return (
-		<section className="leetcode-stats" ref={ref}>
-			<div className="container">
-				<motion.div
-					className="stats-header"
-					initial={{ opacity: 0, y: 30 }}
-					animate={
-						isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-					}
-					transition={{ duration: 0.6 }}
-				>
-					<SiLeetcode className="stats-icon leetcode-icon" />
-					<h2>LeetCode Statistics</h2>
-				</motion.div>
+	const difficulties = stats
+		? [
+				{ key: "easy", label: "Easy", value: stats.easySolved },
+				{ key: "medium", label: "Medium", value: stats.mediumSolved },
+				{ key: "hard", label: "Hard", value: stats.hardSolved },
+			]
+		: [];
+	const difficultyTotal = difficulties.reduce((acc, d) => acc + d.value, 0);
 
+	return (
+		<motion.article
+			className="stats-panel leetcode-stats"
+			ref={ref}
+			initial={{ opacity: 0, y: 24 }}
+			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+			transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+		>
+			<header className="stats-panel-header">
+				<SiLeetcode className="stats-icon" aria-hidden="true" />
+				<div>
+					<h3>LeetCode</h3>
+					<p>@{username}</p>
+				</div>
+			</header>
+
+			<div className="stats-panel-body" aria-live="polite">
 				{loading ? (
-					<div className="loading">
-						<div className="loader"></div>
-						<p>Loading LeetCode stats...</p>
+					<div className="stats-loading">
+						<div className="loader" aria-hidden="true"></div>
+						<p>Loading LeetCode stats…</p>
 					</div>
 				) : stats ? (
 					<motion.div
-						className="stats-grid"
 						variants={containerVariants}
 						initial="hidden"
-						animate={isInView ? "visible" : "hidden"}
+						animate="visible"
 					>
-						<motion.div
-							className="stat-card total"
+						<motion.div className="lc-total" variants={itemVariants}>
+							<span className="stat-value lc-total-value">
+								{stats.totalSolved.toLocaleString()}
+							</span>
+							<span className="stat-label">Problems Solved</span>
+						</motion.div>
+
+						<motion.div variants={itemVariants}>
+							<div
+								className="lc-bar"
+								role="img"
+								aria-label={difficulties
+									.map((d) => `${d.value} ${d.label}`)
+									.join(", ")}
+							>
+								{difficultyTotal > 0 &&
+									difficulties.map((d) => (
+										<span
+											key={d.key}
+											className={`lc-bar-segment ${d.key}`}
+											style={{
+												flexGrow: d.value,
+											}}
+										/>
+									))}
+							</div>
+							<ul className="lc-legend">
+								{difficulties.map((d) => (
+									<li key={d.key}>
+										<span
+											className={`lc-dot ${d.key}`}
+											aria-hidden="true"
+										/>
+										{d.label}
+										<strong>{d.value}</strong>
+									</li>
+								))}
+							</ul>
+						</motion.div>
+
+						<motion.dl
+							className="stats-grid lc-meta"
 							variants={itemVariants}
 						>
-							<div className="stat-value">
-								{stats.totalSolved}
+							<div className="stat-item">
+								<dt className="stat-label">Global Ranking</dt>
+								<dd className="stat-value">
+									{stats.ranking > 0
+										? stats.ranking.toLocaleString()
+										: "N/A"}
+								</dd>
 							</div>
-							<div className="stat-label">Total Solved</div>
-						</motion.div>
-						<motion.div
-							className="stat-card easy"
-							variants={itemVariants}
-						>
-							<div className="stat-value">{stats.easySolved}</div>
-							<div className="stat-label">Easy Problems</div>
-							<div className="difficulty-badge easy-badge">
-								Easy
+							<div className="stat-item">
+								<dt className="stat-label">Acceptance Rate</dt>
+								<dd className="stat-value">
+									{stats.acceptanceRate}%
+								</dd>
 							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card medium"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.mediumSolved}
-							</div>
-							<div className="stat-label">Medium Problems</div>
-							<div className="difficulty-badge medium-badge">
-								Medium
-							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card hard"
-							variants={itemVariants}
-						>
-							<div className="stat-value">{stats.hardSolved}</div>
-							<div className="stat-label">Hard Problems</div>
-							<div className="difficulty-badge hard-badge">
-								Hard
-							</div>
-						</motion.div>
-						<motion.div
-							className="stat-card ranking"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.ranking > 0
-									? stats.ranking.toLocaleString()
-									: "N/A"}
-							</div>
-							<div className="stat-label">Global Ranking</div>
-						</motion.div>
-						<motion.div
-							className="stat-card acceptance"
-							variants={itemVariants}
-						>
-							<div className="stat-value">
-								{stats.acceptanceRate}%
-							</div>
-							<div className="stat-label">Acceptance Rate</div>
-						</motion.div>
+						</motion.dl>
 					</motion.div>
 				) : (
-					<div className="error-message">
-						<p>
-							Unable to load LeetCode stats. Please try again
-							later.
-						</p>
-					</div>
+					<p className="stats-error">
+						LeetCode stats couldn’t be loaded right now. The full
+						profile is one click away.
+					</p>
 				)}
-
-				<motion.div
-					className="leetcode-link"
-					initial={{ opacity: 0 }}
-					animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-					transition={{ delay: 0.8 }}
-				>
-					<a
-						href={`https://leetcode.com/${username}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="btn btn-secondary"
-					>
-						<SiLeetcode /> View LeetCode Profile
-					</a>
-				</motion.div>
 			</div>
-		</section>
+
+			<a
+				href={`https://leetcode.com/${username}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				className="btn btn-on-dark"
+			>
+				<SiLeetcode aria-hidden="true" /> View LeetCode Profile
+			</a>
+		</motion.article>
 	);
 };
 

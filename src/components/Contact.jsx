@@ -1,86 +1,115 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import {
+	FaEnvelope,
+	FaMapMarkerAlt,
+	FaLinkedin,
+	FaFileAlt,
+} from "react-icons/fa";
 import portfolioData from "../data/portfolio";
 import "./Contact.css";
+
+const { personal } = portfolioData;
 
 const Contact = () => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
 
 	const containerVariants = {
-		hidden: { opacity: 0 },
+		hidden: { opacity: 0, y: 24 },
 		visible: {
 			opacity: 1,
+			y: 0,
 			transition: {
-				staggerChildren: 0.2,
+				duration: 0.6,
+				ease: [0.22, 1, 0.36, 1],
+				staggerChildren: 0.08,
+				delayChildren: 0.15,
 			},
 		},
 	};
 
 	const itemVariants = {
-		hidden: { y: 30, opacity: 0 },
+		hidden: { y: 16, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.6,
-			},
+			transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 		},
 	};
 
 	return (
-		<section className="contact" id="contact" ref={ref}>
+		<section className="contact section" id="contact" ref={ref}>
 			<div className="container">
-				<motion.h2
-					className="section-title"
-					initial={{ opacity: 0, y: 30 }}
-					animate={
-						isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-					}
-					transition={{ duration: 0.6 }}
-				>
-					Get In Touch
-				</motion.h2>
-
 				<motion.div
-					className="contact-content"
+					className="contact-band"
 					variants={containerVariants}
 					initial="hidden"
 					animate={isInView ? "visible" : "hidden"}
 				>
-					<motion.div
-						className="contact-info-centered"
-						variants={itemVariants}
-					>
-						<h3>Let's Connect!</h3>
-						<p>
-							I'm always open to discussing new projects, creative
+					<div className="contact-main">
+						<motion.h2 variants={itemVariants}>Let’s Connect</motion.h2>
+						<motion.p variants={itemVariants}>
+							I’m always open to discussing new projects, creative
 							ideas, or opportunities to be part of your vision.
 							Feel free to reach out!
-						</p>
-						<div className="contact-details">
-							<div className="contact-detail">
-								<FaEnvelope className="contact-icon" />
-								<div>
-									<h4>Email</h4>
-									<a
-										href={`mailto:${portfolioData.personal.email}`}
-									>
-										{portfolioData.personal.email}
-									</a>
-								</div>
-							</div>
-							<div className="contact-detail">
-								<FaMapMarkerAlt className="contact-icon" />
-								<div>
-									<h4>Location</h4>
-									<p>{portfolioData.personal.location}</p>
-								</div>
-							</div>
+						</motion.p>
+						<motion.div
+							className="contact-actions"
+							variants={itemVariants}
+						>
+							<a
+								href={`mailto:${personal.email}`}
+								className="btn btn-cream"
+							>
+								<FaEnvelope aria-hidden="true" /> Send an Email
+							</a>
+							<a
+								href={personal.resume}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="btn btn-outline-on-coral"
+							>
+								<FaFileAlt aria-hidden="true" /> View Resume
+							</a>
+						</motion.div>
+					</div>
+
+					<motion.dl className="contact-details" variants={itemVariants}>
+						<div className="contact-detail">
+							<dt>
+								<FaEnvelope aria-hidden="true" /> Email
+							</dt>
+							<dd>
+								<a href={`mailto:${personal.email}`}>
+									{personal.email}
+								</a>
+							</dd>
 						</div>
-					</motion.div>
+						<div className="contact-detail">
+							<dt>
+								<FaLinkedin aria-hidden="true" /> LinkedIn
+							</dt>
+							<dd>
+								<a
+									href={personal.linkedin}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{personal.linkedin
+										.replace(/^https?:\/\/(www\.)?/, "")
+										.replace(/\/$/, "")}
+								</a>
+							</dd>
+						</div>
+						<div className="contact-detail">
+							<dt>
+								<FaMapMarkerAlt aria-hidden="true" /> Location
+							</dt>
+							<dd>{personal.location}</dd>
+						</div>
+					</motion.dl>
 				</motion.div>
 			</div>
 		</section>

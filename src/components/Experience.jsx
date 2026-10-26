@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
 import portfolioData from "../data/portfolio";
 import "./Experience.css";
 
@@ -14,87 +13,78 @@ const Experience = () => {
 		visible: {
 			opacity: 1,
 			transition: {
-				staggerChildren: 0.2,
+				staggerChildren: 0.1,
 			},
 		},
 	};
 
 	const itemVariants = {
-		hidden: { x: -50, opacity: 0 },
+		hidden: { y: 24, opacity: 0 },
 		visible: {
-			x: 0,
+			y: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.6,
-			},
+			transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
 		},
 	};
 
 	return (
-		<section className="experience" id="experience" ref={ref}>
-			<div className="container">
-				<motion.h2
-					className="section-title"
-					initial={{ opacity: 0, y: 30 }}
-					animate={
-						isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-					}
-					transition={{ duration: 0.6 }}
-				>
-					Experience
-				</motion.h2>
+		<section className="experience section" id="experience" ref={ref}>
+			<motion.div
+				className="container"
+				variants={containerVariants}
+				initial="hidden"
+				animate={isInView ? "visible" : "hidden"}
+			>
+				<motion.div className="section-head" variants={itemVariants}>
+					<h2 className="section-title">Experience</h2>
+					<p className="section-lead">
+						From building APIs as an intern to working inside
+						PostgreSQL at Zoho.
+					</p>
+				</motion.div>
 
-				<motion.div
-					className="timeline"
-					variants={containerVariants}
-					initial="hidden"
-					animate={isInView ? "visible" : "hidden"}
-				>
-					{portfolioData.experience.map((item, index) => (
-						<motion.div
-							key={index}
-							className="timeline-item"
-							variants={itemVariants}
-						>
-							<div className="timeline-icon">
-								{item.type === "work" ? (
-									<FaBriefcase />
-								) : (
-									<FaGraduationCap />
-								)}
-							</div>
-							<div className="timeline-content">
-								<div className="timeline-header">
-									<div className="timeline-title-group">
-										<h3>{item.title}</h3>
-										<h4 className="timeline-company">
-											{item.company}
-										</h4>
-									</div>
+				<ol className="timeline">
+					{portfolioData.experience.map((item) => {
+						const isCurrent = /present/i.test(item.period);
+						return (
+							<motion.li
+								key={`${item.title}-${item.period}`}
+								className="timeline-item"
+								variants={itemVariants}
+							>
+								<div className="timeline-meta">
 									<span className="timeline-period">
 										{item.period}
 									</span>
+									<span className="timeline-company">
+										{item.company}
+									</span>
+									{isCurrent && (
+										<span className="badge-coral">Current</span>
+									)}
 								</div>
-								<p className="timeline-description">
-									{item.description}
-								</p>
-								{item.achievements &&
-									item.achievements.length > 0 && (
+								<div className="timeline-content">
+									<h3>{item.title}</h3>
+									<p className="timeline-description">
+										{item.description}
+									</p>
+									{item.achievements?.length > 0 && (
 										<ul className="timeline-achievements">
 											{item.achievements.map(
-												(achievement, idx) => (
-													<li key={idx}>
+												(achievement) => (
+													<li key={achievement}>
 														{achievement}
 													</li>
 												),
 											)}
 										</ul>
 									)}
-							</div>
-						</motion.div>
-					))}
-				</motion.div>
-			</div>
+								</div>
+							</motion.li>
+						);
+					})}
+				</ol>
+			</motion.div>
 		</section>
 	);
 };

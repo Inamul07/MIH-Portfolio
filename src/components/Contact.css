@@ -1,97 +1,106 @@
 .contact {
-	padding: 5rem 2rem;
-	background: var(--bg-secondary);
+	background: var(--canvas);
 }
 
-.contact-content {
-	max-width: 800px;
-	margin: 0 auto;
-	text-align: center;
+.contact-band {
+	display: grid;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	gap: var(--space-xxl);
+	align-items: end;
+	padding: 64px;
+	border-radius: var(--rounded-lg);
+	background: var(--primary);
+	color: var(--on-primary);
 }
 
-.contact-info-centered {
-	width: 100%;
+.contact-main h2 {
+	color: var(--on-primary);
+	font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+	line-height: 1.1;
+	letter-spacing: -1px;
 }
 
-.contact-info-centered h3 {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-	color: var(--text-primary);
+.contact-main p {
+	margin-top: var(--space-md);
+	max-width: 44ch;
+	font-size: 18px;
+	line-height: 1.5;
+	color: var(--on-primary);
 }
 
-.contact-info-centered > p {
-	color: var(--text-secondary);
-	line-height: 1.8;
-	margin-bottom: 3rem;
-	max-width: 600px;
-	margin-left: auto;
-	margin-right: auto;
+.contact-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm);
+	margin-top: var(--space-xl);
+}
+
+.btn-outline-on-coral {
+	background: transparent;
+	color: var(--on-primary);
+	border: 1px solid currentColor;
+}
+
+.btn-outline-on-coral:hover,
+.btn-outline-on-coral:active {
+	background: var(--primary-active);
+	color: var(--on-primary);
+}
+
+.contact-band :focus-visible {
+	outline-color: var(--on-primary);
 }
 
 .contact-details {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 3rem;
-	flex-wrap: wrap;
+	display: grid;
+	gap: var(--space-md);
 }
 
 .contact-detail {
-	display: flex;
-	flex-direction: column;
+	padding-top: var(--space-md);
+	border-top: 1px solid
+		color-mix(in srgb, var(--on-primary) 30%, transparent);
+}
+
+.contact-detail dt {
+	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem;
-	min-width: 250px;
-	padding: 2rem;
-	background: var(--bg-tertiary);
-	border-radius: 12px;
-	border: 1px solid var(--border-color);
-	transition: all 0.3s ease;
+	gap: var(--space-xs);
+	font-size: 13px;
+	font-weight: 500;
+	opacity: 0.85;
 }
 
-.contact-detail:hover {
-	border-color: var(--accent-primary);
-	transform: translateY(-5px);
-	box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+.contact-detail dd {
+	margin-top: 2px;
+	font-size: 17px;
+	font-weight: 500;
+	overflow-wrap: anywhere;
 }
 
-.contact-icon {
-	font-size: 2.5rem;
-	color: var(--accent-primary);
-}
-
-.contact-detail h4 {
-	font-size: 1.2rem;
-	margin-bottom: 0.5rem;
-	color: var(--text-primary);
-}
-
-.contact-detail p,
 .contact-detail a {
-	color: var(--text-secondary);
-	font-size: 1rem;
-	text-align: center;
+	color: var(--on-primary);
+	text-decoration: underline;
+	text-decoration-color: color-mix(
+		in srgb,
+		var(--on-primary) 45%,
+		transparent
+	);
 }
+
 .contact-detail a:hover {
-	color: var(--accent-primary);
+	text-decoration-color: currentColor;
 }
 
-@media (max-width: 768px) {
-	.contact {
-		padding: 3rem 1.5rem;
+@media (max-width: 1023px) {
+	.contact-band {
+		grid-template-columns: 1fr;
+		padding: var(--space-xxl);
 	}
+}
 
-	.contact-details {
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.contact-detail {
-		min-width: auto;
-		width: 100%;
-	}
-
-	.contact-info-centered h3 {
-		font-size: 1.5rem;
+@media (max-width: 767px) {
+	.contact-band {
+		padding: var(--space-xl) var(--space-lg);
 	}
 }

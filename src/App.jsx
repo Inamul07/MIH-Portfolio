@@ -1,3 +1,4 @@
+import { MotionConfig } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -11,17 +12,38 @@ import "./App.css";
 
 function App() {
 	return (
-		<div className="App">
-			<Navbar />
-			<Hero />
-			<About />
-			<Projects />
-			<Experience />
-			<GitHubStats />
-			<LeetCodeStats />
-			<Contact />
-			<Footer />
-		</div>
+		<MotionConfig reducedMotion="user">
+			<div className="App">
+				<a href="#main" className="skip-link">
+					Skip to content
+				</a>
+				<Navbar />
+				<main id="main">
+					<Hero />
+					<About />
+					<Projects />
+					<Experience />
+					<section className="stats-band" id="stats">
+						<div className="container">
+							<div className="section-head">
+								<h2 className="section-title">By the Numbers</h2>
+								<p className="section-lead">
+									Live from GitHub and LeetCode — open source
+									work on one side, problem solving on the
+									other.
+								</p>
+							</div>
+							<div className="stats-panels">
+								<GitHubStats />
+								<LeetCodeStats />
+							</div>
+						</div>
+					</section>
+					<Contact />
+				</main>
+				<Footer />
+			</div>
+		</MotionConfig>
 	);
 }
 

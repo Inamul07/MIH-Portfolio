@@ -4,6 +4,37 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Mohammed Inamul Hassan M — software engineer at Zoho working on PostgreSQL internals, extensions and highly available database deployments."
+		/>
+		<meta
+			name="theme-color"
+			content="#faf9f5"
+			media="(prefers-color-scheme: light)"
+		/>
+		<meta
+			name="theme-color"
+			content="#1a1917"
+			media="(prefers-color-scheme: dark)"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap"
+			rel="stylesheet"
+		/>
+		<script>
+			// Apply the saved theme before first paint to avoid a flash
+			try {
+				const theme = localStorage.getItem("theme");
+				if (theme === "light" || theme === "dark") {
+					document.documentElement.dataset.theme = theme;
+				}
+			} catch {
+				/* storage unavailable: follow the OS preference */
+			}
+		</script>
 		<title>Mohammed Inamul Hassan M</title>
 	</head>
 	<body>
