@@ -1,0 +1,74 @@
+/* Syntax colours for highlight.js tokens on the dark code surface,
+   drawn from the warm palette in DESIGN.md. */
+.hljs-comment,
+.hljs-quote {
+	color: #8e8b82;
+	font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-meta .hljs-keyword,
+.hljs-doctag {
+	color: #e09a80;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-template-tag,
+.hljs-template-variable {
+	color: #a8cf8e;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-variable.constant_ {
+	color: #e8a55a;
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-section {
+	color: #7fc8ba;
+}
+
+.hljs-type,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+	color: #e8c27a;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-variable,
+.hljs-params {
+	color: #d3cec5;
+}
+
+.hljs-name,
+.hljs-tag,
+.hljs-selector-id,
+.hljs-selector-class {
+	color: #e09a80;
+}
+
+.hljs-meta {
+	color: #a09d96;
+}
+
+.hljs-deletion {
+	color: #e88a8a;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: 600;
+}

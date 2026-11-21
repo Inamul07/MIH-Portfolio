@@ -20,6 +20,30 @@ A modern, dark-themed portfolio website built with React, Vite, and Framer Motio
 - **React Icons** - Icon library
 - **Axios** - HTTP client for API calls
 
+## ✍️ Writing blog posts
+
+Posts are Markdown files in `content/blog/`. The file name becomes the URL:
+`content/blog/my-first-post.md` → `/blog/my-first-post`.
+
+Start each file with frontmatter:
+
+```markdown
+---
+title: "My first post"
+date: 2026-11-21
+description: One-line summary shown in the post list, page meta and RSS.
+tags: [notes, learning]
+---
+
+Your post in GitHub-flavoured Markdown…
+```
+
+- `title` and `date` (YYYY-MM-DD) are required; posts missing either are skipped with a console warning.
+- Fenced code blocks need a language (` ```sql `, ` ```c `) to get syntax highlighting.
+- Put images in `public/images/blog/` and reference them as `/images/blog/name.png`.
+- Commit and push: Vercel rebuilds, and the post, its tags and `/rss.xml` update automatically.
+- The RSS feed uses Vercel's production domain. Set a `SITE_URL` env var to override it (for example, a custom domain).
+
 ## 📦 Installation
 
 1. Clone the repository or navigate to the project folder:

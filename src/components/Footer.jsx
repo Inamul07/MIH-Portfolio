@@ -1,17 +1,19 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import { Link } from "react-router-dom";
 import portfolioData from "../data/portfolio";
 import "./Footer.css";
 
 const { personal } = portfolioData;
 
 const quickLinks = [
-	{ name: "Home", href: "#home" },
-	{ name: "About", href: "#about" },
-	{ name: "Projects", href: "#projects" },
-	{ name: "Experience", href: "#experience" },
-	{ name: "Stats", href: "#stats" },
-	{ name: "Contact", href: "#contact" },
+	{ name: "Home", href: "/#home" },
+	{ name: "About", href: "/#about" },
+	{ name: "Projects", href: "/#projects" },
+	{ name: "Experience", href: "/#experience" },
+	{ name: "Blog", href: "/blog" },
+	{ name: "Stats", href: "/#stats" },
+	{ name: "Contact", href: "/#contact" },
 ];
 
 const connectLinks = [
@@ -46,7 +48,7 @@ const Footer = () => {
 						<ul className="footer-links">
 							{quickLinks.map((link) => (
 								<li key={link.href}>
-									<a href={link.href}>{link.name}</a>
+									<Link to={link.href}>{link.name}</Link>
 								</li>
 							))}
 						</ul>

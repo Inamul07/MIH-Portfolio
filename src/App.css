@@ -30,3 +30,12 @@
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Homepage "Writing" section */
+.latest-posts {
+	background: var(--canvas);
+}
+
+.latest-posts-all {
+	margin-top: var(--space-xl);
+}

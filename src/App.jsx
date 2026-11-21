@@ -1,14 +1,35 @@
+import { Suspense, lazy, useEffect } from "react";
 import { MotionConfig } from "framer-motion";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import GitHubStats from "./components/GitHubStats";
-import LeetCodeStats from "./components/LeetCodeStats";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import BlogIndex from "./pages/BlogIndex";
+import NotFound from "./pages/NotFound";
 import "./App.css";
+
+// Markdown + syntax highlighting only load when a post is opened
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+
+// On route change: jump to the #hash target if there is one, else the top
+const ScrollManager = () => {
+	const { pathname, hash } = useLocation();
+
+	useEffect(() => {
+		if (hash) {
+			const target = document.getElementById(
+				decodeURIComponent(hash.slice(1)),
+			);
+			if (target) {
+				target.scrollIntoView();
+				return;
+			}
+		}
+		window.scrollTo({ top: 0, behavior: "instant" });
+	}, [pathname, hash]);
+
+	return null;
+};
 
 function App() {
 	return (
@@ -17,29 +38,24 @@ function App() {
 				<a href="#main" className="skip-link">
 					Skip to content
 				</a>
+				<ScrollManager />
 				<Navbar />
 				<main id="main">
-					<Hero />
-					<About />
-					<Projects />
-					<Experience />
-					<section className="stats-band" id="stats">
-						<div className="container">
-							<div className="section-head">
-								<h2 className="section-title">By the Numbers</h2>
-								<p className="section-lead">
-									Live from GitHub and LeetCode — open source
-									work on one side, problem solving on the
-									other.
-								</p>
-							</div>
-							<div className="stats-panels">
-								<GitHubStats />
-								<LeetCodeStats />
-							</div>
-						</div>
-					</section>
-					<Contact />
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/blog" element={<BlogIndex />} />
+						<Route
+							path="/blog/:slug"
+							element={
+								<Suspense
+									fallback={<div className="blog-page" />}
+								>
+									<BlogPost />
+								</Suspense>
+							}
+						/>
+						<Route path="*" element={<NotFound />} />
+					</Routes>
 				</main>
 				<Footer />
 			</div>

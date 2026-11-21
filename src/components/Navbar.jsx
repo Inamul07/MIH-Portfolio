@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import portfolioData from "../data/portfolio";
 import "./Navbar.css";
 
 const navLinks = [
-	{ name: "About", href: "#about" },
-	{ name: "Projects", href: "#projects" },
-	{ name: "Experience", href: "#experience" },
-	{ name: "Stats", href: "#stats" },
-	{ name: "Contact", href: "#contact" },
+	{ name: "About", href: "/#about" },
+	{ name: "Projects", href: "/#projects" },
+	{ name: "Experience", href: "/#experience" },
+	{ name: "Blog", href: "/blog" },
+	{ name: "Stats", href: "/#stats" },
+	{ name: "Contact", href: "/#contact" },
 ];
 
 const getInitialTheme = () => {
@@ -24,6 +26,9 @@ const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [theme, setTheme] = useState(getInitialTheme);
+	const { pathname } = useLocation();
+	const isCurrent = (href) =>
+		href === "/blog" && pathname.startsWith("/blog") ? "page" : undefined;
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -75,8 +80,8 @@ const Navbar = () => {
 			aria-label="Primary"
 		>
 			<div className="nav-container container">
-				<a
-					href="#home"
+				<Link
+					to="/#home"
 					className="nav-logo"
 					onClick={closeMenu}
 					aria-label={`${portfolioData.personal.name}, back to top`}
@@ -85,12 +90,17 @@ const Navbar = () => {
 					<span className="nav-logo-dot" aria-hidden="true">
 						.
 					</span>
-				</a>
+				</Link>
 
 				<ul className="nav-links">
 					{navLinks.map((link) => (
 						<li key={link.href}>
-							<a href={link.href}>{link.name}</a>
+							<Link
+								to={link.href}
+								aria-current={isCurrent(link.href)}
+							>
+								{link.name}
+							</Link>
 						</li>
 					))}
 				</ul>
@@ -154,9 +164,13 @@ const Navbar = () => {
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.05 + index * 0.05 }}
 								>
-									<a href={link.href} onClick={closeMenu}>
+									<Link
+										to={link.href}
+										onClick={closeMenu}
+										aria-current={isCurrent(link.href)}
+									>
 										{link.name}
-									</a>
+									</Link>
 								</motion.li>
 							))}
 						</ul>
